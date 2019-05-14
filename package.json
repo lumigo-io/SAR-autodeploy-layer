@@ -1,0 +1,43 @@
+{
+  "name": "sar-autodeploy-layer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "test": "jest",
+    "test:lint": "eslint .",
+    "package": "sam package --template-file template.yml --output-template-file packaged.yml --s3-bucket sar-autodeploy-layer",
+    "publish": "sam publish --template packaged.yml --region us-east-1"
+  },
+  "keywords": [],
+  "author": "Yan Cui",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.420.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-conventional": "^7.5.0",
+    "coveralls": "^3.0.2",
+    "eslint": "^5.13.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^1.3.1",
+    "jest": "^23.1.0",
+    "lint-staged": "^8.1.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ]
+  }
+}

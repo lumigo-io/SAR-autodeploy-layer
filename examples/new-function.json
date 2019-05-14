@@ -1,0 +1,73 @@
+{
+  "version": "0",
+  "id": "58be9a34-94a4-1810-b8e0-3b43c832ca2a",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.lambda",
+  "account": "374852340823",
+  "time": "2019-05-06T22:49:51Z",
+  "region": "us-east-1",
+  "resources": [],
+  "detail": {
+      "eventVersion": "1.05",
+      "userIdentity": {
+          "type": "IAMUser",
+          "principalId": "AIDAIRMUZZEGPO27IPFYW",
+          "arn": "arn:aws:iam::374852340823:user/yan.cui",
+          "accountId": "374852340823",
+          "accessKeyId": "ASIAVORXQZRLXBOU6JKF",
+          "userName": "yan.cui",
+          "sessionContext": {
+              "attributes": {
+                  "mfaAuthenticated": "true",
+                  "creationDate": "2019-05-06T17:42:40Z"
+              }
+          },
+          "invokedBy": "signin.amazonaws.com"
+      },
+      "eventTime": "2019-05-06T22:49:51Z",
+      "eventSource": "lambda.amazonaws.com",
+      "eventName": "CreateFunction20150331",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "37.220.138.169",
+      "userAgent": "signin.amazonaws.com",
+      "requestParameters": {
+          "functionName": "test",
+          "kMSKeyArn": "",
+          "role": "arn:aws:iam::374852340823:role/service-role/test-role-q1kqxlps",
+          "memorySize": 128,
+          "code": {},
+          "timeout": 3,
+          "environment": {},
+          "deadLetterConfig": {},
+          "tracingConfig": {
+              "mode": "PassThrough"
+          },
+          "publish": false,
+          "description": "",
+          "handler": "index.handler",
+          "runtime": "nodejs8.10"
+      },
+      "responseElements": {
+          "role": "arn:aws:iam::374852340823:role/service-role/test-role-q1kqxlps",
+          "revisionId": "4b0feef1-e366-44f4-bcfa-1f35e93b5a87",
+          "handler": "index.handler",
+          "memorySize": 128,
+          "runtime": "nodejs8.10",
+          "functionArn": "arn:aws:lambda:us-east-1:374852340823:function:test",
+          "functionName": "test",
+          "codeSize": 262,
+          "version": "$LATEST",
+          "tracingConfig": {
+              "mode": "PassThrough"
+          },
+          "description": "",
+          "lastModified": "2019-05-06T22:49:51.121+0000",
+          "codeSha256": "fpklmFbDHBZbWruej4EXC4DxIxvRVvc5P2qiUWanj6w=",
+          "environment": {},
+          "timeout": 3
+      },
+      "requestID": "41d831b2-7051-11e9-ae33-e1ef4db2a511",
+      "eventID": "e2abcbcc-02c7-4c8c-8381-5c71ed2b8d6a",
+      "eventType": "AwsApiCall"
+  }
+}

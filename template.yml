@@ -1,0 +1,102 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: autodeploy-layer
+    Description: Automatically deploys the specified Lambda layer to all new and existing functions
+    Author: Lumigo
+    SpdxLicenseId: MIT
+    LicenseUrl: LICENSE
+    ReadmeUrl: README.md
+    Labels: ['ops', 'automation', 'layer']
+    HomePageUrl: https://github.com/lumigo/SAR-autodeploy-layer
+    SemanticVersion: 1.1.0
+    SourceCodeUrl: https://github.com/lumigo/SAR-autodeploy-layer
+
+Parameters:
+  LayerArn:
+    Type: String    
+    Description: The ARN of the Lambda layer.
+  IncludeTag:
+    Type: String
+    Default: ''
+    Description: >
+      (Optional) if specified then only functions that has this tag would be given the Layer.
+  ExcludeTag:
+    Type: String
+    Default: ''
+    Description: >
+      (Optional) if specified then functions with this tag would not be given the layer.
+
+Resources:
+  DeployToNewFunctions:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: functions/add-layer.newFunction
+      Runtime: nodejs8.10
+      Description: Deploys the Lambda layer to new functions
+      MemorySize: 128
+      Timeout: 6
+      Environment:
+        Variables:
+          INCLUDE_TAG:
+            Ref: IncludeTag
+          EXCLUDE_TAG:
+            Ref: ExcludeTag
+          LAYER_ARN:
+            Ref: LayerArn          
+      Policies:
+        - Statement:
+            Effect: Allow
+            Action:
+              - lambda:ListTags
+              - lambda:GetFunctionConfiguration
+              - lambda:UpdateFunctionConfiguration
+            Resource: '*'        
+      Events:
+        AutodeployEvent:
+          Type: CloudWatchEvent
+          Properties:
+            Pattern:
+              source:
+                - aws.lambda
+              detail-type:
+                - AWS API Call via CloudTrail
+              detail:
+                eventSource:
+                  - lambda.amazonaws.com
+                eventName:
+                  - CreateFunction20150331
+  
+  DeployToExistingFunctions:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: functions/add-layer.existingFunctions
+      Runtime: nodejs8.10
+      Description: Deploys the Lambda layer to existing functions.
+      MemorySize: 128
+      Timeout: 900
+      Environment:
+        Variables:
+          INCLUDE_TAG:
+            Ref: IncludeTag
+          EXCLUDE_TAG:
+            Ref: ExcludeTag
+          LAYER_ARN:
+            Ref: LayerArn
+      Policies:
+        - Statement:
+            Effect: Allow
+            Action:
+              - lambda:ListTags
+              - lambda:GetLayerVersion
+              - lambda:GetFunctionConfiguration
+              - lambda:UpdateFunctionConfiguration
+              - lambda:ListFunctions
+            Resource: '*'
+      Events:
+        ScheduledEvent:
+          Type: Schedule
+          Properties:
+            Schedule: rate(1 hour)
