@@ -1,6 +1,7 @@
 # SAR-AutoDeploy-Layer
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/lumigo/SAR-autodeploy-layer.svg)](https://greenkeeper.io/)
+[![CircleCI](https://circleci.com/gh/lumigo/SAR-autodeploy-layer.svg?style=svg)](https://circleci.com/gh/lumigo/SAR-autodeploy-layer)
 
 SAR app for automatically deploying Lambda layer to all functions in a region.
 
