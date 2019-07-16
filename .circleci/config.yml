@@ -27,20 +27,17 @@ workflows:
   version: 2
   build:
     jobs:
-      - build:
-          filters:
-            branches:
-              ignore: master
+      - build
 
   build_and_deploy:
     jobs:
       - build:
           filters:
             branches:
-              only: master
+              only: deploy
       - deploy:
           requires:
             - build
           filters:
             branches:
-              only: master
+              only: deploy
