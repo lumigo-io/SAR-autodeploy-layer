@@ -53,7 +53,7 @@ Resources:
               - lambda:ListTags
               - lambda:GetFunctionConfiguration
               - lambda:UpdateFunctionConfiguration
-            Resource: '*'        
+            Resource: '*'
       Events:
         AutodeployEvent:
           Type: CloudWatchEvent
