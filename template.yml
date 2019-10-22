@@ -11,7 +11,7 @@ Metadata:
     ReadmeUrl: README.md
     Labels: ['ops', 'automation', 'layer']
     HomePageUrl: https://github.com/lumigo/SAR-autodeploy-layer
-    SemanticVersion: 1.0.2
+    SemanticVersion: 1.1.0
     SourceCodeUrl: https://github.com/lumigo/SAR-autodeploy-layer
 
 Parameters:
@@ -29,23 +29,26 @@ Parameters:
     Description: >
       (Optional) if specified then functions with this tag would not be given the layer.
 
+Globals:
+  Function:
+    Runtime: nodejs10.x
+    MemorySize: 128
+    Environment:
+      Variables:
+        INCLUDE_TAG:
+          Ref: IncludeTag
+        EXCLUDE_TAG:
+          Ref: ExcludeTag
+        LAYER_ARN:
+          Ref: LayerArn
+
 Resources:
   DeployToNewFunctions:
     Type: AWS::Serverless::Function
     Properties:
       Handler: functions/add-layer.newFunction
-      Runtime: nodejs8.10
       Description: Deploys the Lambda layer to new functions
-      MemorySize: 128
       Timeout: 6
-      Environment:
-        Variables:
-          INCLUDE_TAG:
-            Ref: IncludeTag
-          EXCLUDE_TAG:
-            Ref: ExcludeTag
-          LAYER_ARN:
-            Ref: LayerArn          
       Policies:
         - Statement:
             Effect: Allow
@@ -73,18 +76,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: functions/add-layer.existingFunctions
-      Runtime: nodejs8.10
       Description: Deploys the Lambda layer to existing functions.
-      MemorySize: 128
       Timeout: 900
-      Environment:
-        Variables:
-          INCLUDE_TAG:
-            Ref: IncludeTag
-          EXCLUDE_TAG:
-            Ref: ExcludeTag
-          LAYER_ARN:
-            Ref: LayerArn
       Policies:
         - Statement:
             Effect: Allow

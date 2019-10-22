@@ -1,6 +1,6 @@
 # SAR-AutoDeploy-Layer
 
-[![Version](https://img.shields.io/badge/semver-1.0.2-blue)](template.yml)
+[![Version](https://img.shields.io/badge/semver-1.1.0-blue)](template.yml)
 [![Greenkeeper badge](https://badges.greenkeeper.io/lumigo/SAR-autodeploy-layer.svg)](https://greenkeeper.io/)
 [![CircleCI](https://circleci.com/gh/lumigo/SAR-autodeploy-layer.svg?style=svg)](https://circleci.com/gh/lumigo/SAR-autodeploy-layer)
 
