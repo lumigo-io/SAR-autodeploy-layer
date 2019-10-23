@@ -74,7 +74,6 @@ Resources:
   
   DeployToNewFunctionsLogGroup:
     Type: AWS::Logs::LogGroup
-    Condition: IsKinesis
     Properties:
       LogGroupName: !Sub /aws/lambda/${DeployToNewFunctions}
 
@@ -102,6 +101,5 @@ Resources:
 
   DeployToExistingFunctionsLogGroup:
     Type: AWS::Logs::LogGroup
-    Condition: IsKinesis
     Properties:
       LogGroupName: !Sub /aws/lambda/${DeployToExistingFunctions}
