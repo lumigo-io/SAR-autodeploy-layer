@@ -13,7 +13,7 @@
   "author": "Yan Cui",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.420.0"
+    "aws-sdk": "^2.667.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
